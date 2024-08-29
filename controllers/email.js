@@ -72,23 +72,6 @@ exports.verfiyEmail=(req,res,next)=>{
     }
 }
 
-exports.saveUser=async(req,res,next)=>{
-    console.log("Heree")
-    const {email,userName}=req.body
-    try{
-        const user=new UserModel({email,userName,isMailVerfied:true});
-   const response= await user.save();
-   res.status(200).json({message:"User Creation Successfull",id:response._id})
-    }
-    catch(error){
-        // Handling Errors Related to Duplicate Email Id
-        if (error.code === 11000) {
-            res.status(400).json({ message: "Email already exists. Please use a different email."});
-          } else {
-            // Handle other errors
-            res.status(500).json({ message: "An error occurred while creating the user." });
-          }
-    }
-}
+
 
 

@@ -29,14 +29,19 @@ app.use(session({
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        maxAge:  5* 60 * 1000 
+        maxAge:  15* 60 * 1000 ,
+        secure:false
     }
 }));
 
 
 const registration=require('./routes/registration')
 
-app.use('/registration',registration)
+const authenticateUser=require('./routes/user')
+
+app.use('/registration',registration);
+
+app.use('/login',authenticateUser)
 
 
 mongodb.connect(process.env.MONGODB_URI).then(()=>{
