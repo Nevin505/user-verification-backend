@@ -10,7 +10,6 @@ const emailVerficationController=require('../controllers/email');
 const phoneVerficationController=require('../controllers/phone');
 
 
-const addressVerficationController=require('../controllers/addressLookup')
 
 
 
@@ -24,7 +23,6 @@ router.post('/request-phone-otp',phoneVerficationController.sendPhoneOtp)
 
 router.post('/validate-phone-otp',phoneVerficationController.verifyPhoneOtp)
 
-router.get('/validate-address/:pincode',addressVerficationController.verifyAddress)
 
 
 
