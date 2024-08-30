@@ -4,8 +4,11 @@ exports.verifyAddress = async (req, res, next) => {
     const pincode = req.params.pincode;
 
     // Validate if pincode is present
-    if (!pincode) {
-        return res.status(400).json({ message: "Pincode is required" });
+    if (!pincode || pincode.length!=6) {
+        return res.status(400).json({ message: "Pincode is Not Valid" });
+    }
+    if (!/^\d+$/.test(pincode)) {
+        return res.status(400).json({ message: "Pincode must contain only numeric digits" });
     }
 
     const options = {
@@ -29,6 +32,6 @@ exports.verifyAddress = async (req, res, next) => {
         return res.json(response.data[0]);
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: "An error occurred while verifying the address" });
+        return res.status(error.status|500).json({ error: "An error occurred while verifying the address" });
     }
 };

@@ -40,6 +40,10 @@ const userSchema=new Schema({
         type:String,
         default:null
     },
+    isAadhaarVerified:{
+        type:Boolean,
+        default:false
+    },
     panCard:{
         type:String,
         default:null
