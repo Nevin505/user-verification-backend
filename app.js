@@ -39,9 +39,14 @@ const registration=require('./routes/registration')
 
 const authenticateUser=require('./routes/user')
 
+const verificationRoutes=require('./routes/verification')
+
+
 app.use('/registration',registration);
 
 app.use('/login',authenticateUser)
+
+app.use('/verify',verificationRoutes)
 
 
 mongodb.connect(process.env.MONGODB_URI).then(()=>{

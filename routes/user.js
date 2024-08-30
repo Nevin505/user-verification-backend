@@ -7,4 +7,5 @@ const  userController=require('../controllers/user')
 
 router.post('/',userController.authenticateUser)
 
+
 module.exports=router;

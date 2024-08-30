@@ -48,6 +48,14 @@ const userSchema=new Schema({
         type:String,
         default:null
     },
+    gstNumber:{
+        type:String,
+        default:null
+    },
+    isGstVerifed:{
+        type:Boolean,
+        default:false
+    },
     password:{
         type:String,
         // required:true
@@ -59,13 +67,16 @@ const userSchema=new Schema({
         type:Boolean
     },
     isPanVerified:{
-        type:Boolean
+        type:Boolean,
+        default:false
     },
     isBankAccountVerified:{
-        type:Boolean
+        type:Boolean,
+        default:false
     },
     isAccountVerified:{
-        type:Boolean
+        type:Boolean,
+        default:false
     }
 })
 
