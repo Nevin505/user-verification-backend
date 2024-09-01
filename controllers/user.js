@@ -29,7 +29,7 @@ exports.authenticateUser = async (req, res, next) => {
 
   // Check if email or password is missing
   if (!email || !password) {
-    return res.status(400).json({ error: "Email and password are required." });
+    return res.status(400).json({ message: "Email and password are required." });
   }
 
   try {
@@ -38,7 +38,7 @@ exports.authenticateUser = async (req, res, next) => {
 
     // If user not found, return a 404 status with a message
     if (!user) {
-      return res.status(404).json({ error: "Invalid email or password." });
+      return res.status(404).json({ message: "Invalid email or password." });
     }
 
     // If user is found, return the user data
@@ -49,3 +49,21 @@ exports.authenticateUser = async (req, res, next) => {
     res.status(500).json({ error: "Internal Server Error", details: error.message });
   }
 };
+
+exports.fetchUserDetails=async(req,res,next)=>{
+  const userId=req.params.userId
+  if(!userId){
+    return res.status(404).json({message:'Enter a User Id'})
+  }
+   try{
+    const response=await UserModel.findById(userId);
+    if(response){
+      return res.json(response)
+    }
+    return res.status(404).json({ message: "User with the provided ID not found" })
+   }
+   catch(error){
+    return res.status(500).json({ message: "An unexpected error occurred. Please try again later." })
+     
+   }
+}

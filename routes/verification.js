@@ -16,15 +16,15 @@ const aadhaarVerficationController=require('../controllers/aadhaar')
 
 
 
-router.post('/validate-gstin',gstinVerficationController.gstVerification)
+router.patch('/validate-gstin',gstinVerficationController.gstVerification)
 
 router.get('/validate-address/:pincode',addressVerficationController.verifyAddress)
 
-router.post('/bank-Account',userController.postBankAccount)
+router.patch('/bank-Account',userController.postBankAccount)
 
-router.post('/panCard',panCardVerficationController.verifyPanCard)
+router.patch('/panCard',panCardVerficationController.verifyPanCard)
 
-router.post('/aadhaar',aadhaarVerficationController.verifyaadhaar)
+router.patch('/aadhaar',aadhaarVerficationController.verifyaadhaar)
 
 
 

@@ -5,9 +5,9 @@ const UserModel=require('../Models/User')
 exports.verifyPanCard=async(req,res,next)=>{
 
     const{userId,panCard}=req.body;
-    // return res.json({panCard})
 
-     // Validate if panCard is present
+    console.log({userId,panCard})
+
      if (!panCard) {
         return res.status(400).json({ message: "PAN Card number is required" });
     }
@@ -36,22 +36,27 @@ exports.verifyPanCard=async(req,res,next)=>{
       try {
         const response = await axios.request(options);
         if (response.status !== 200) {
+            // console.log(response);
+
             return res.status(response.status).json({ message: "Failed to verify PAN Card", details: response.data });
         }
-        if(response.data.success=="success" && response.data.pan){
+        if(response.data.status==="success" && response.data.result!==null){
+            console.log(response);
 
            const userData= await UserModel.findByIdAndUpdate(userId,{userId:true,panCard,isPanVerified:true})
              console.log(userData);
              if(!userData){
                 return res.status(404).json({message:"User Don't Exist"})
              }
-            return res.json(response.data);
+            return res.json({message:"PanCard Verified Linked With Aadhaar"});
         }
         else{
+              console.log(response.data)
             return res.status(404).json({ message: " PAN Card Doesn't Exist"});
         }
     } catch (error) {
         console.error(error);
+        return res.status(500).json({ message: " UnExpected Event Occurred"});
     }
 }
 

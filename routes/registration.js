@@ -21,7 +21,7 @@ router.post('/saveUser',userController.saveUser)
 
 router.post('/request-phone-otp',phoneVerficationController.sendPhoneOtp)
 
-router.post('/validate-phone-otp',phoneVerficationController.verifyPhoneOtp)
+router.patch('/validate-phone-otp',phoneVerficationController.verifyPhoneOtp)
 
 
 

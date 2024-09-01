@@ -5,6 +5,7 @@ const UserModel=require('../Models/User')
 // GSTIN validations
 exports.gstVerification = async (req, res, next) => {
     const { gstinNumber ,userId} = req.body;
+    console.log({gstinNumber ,userId})
 
     // Check if gstinNumber is provided
     if (!gstinNumber) {
@@ -42,7 +43,7 @@ exports.gstVerification = async (req, res, next) => {
             }
         }
         else{
-            return res.status(400).json({ message: 'No GSTIN was found in the response' });
+            return res.status(400).json({ message: 'GSTIN not found. Please verify the entered number and try again.'});
         }
     } catch (error) {
         res.status(500).json({ message: 'Failed to verify GST number', error });
